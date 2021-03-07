@@ -11,7 +11,8 @@ export class RegisterComponent implements OnInit {
   user: User = {
     firstName: '',
     lastName: '',
-    email: ''
+    email: '',
+    password: ''
   };
   registered = false;
 
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
     const data = {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
-      email: this.user.email
+      email: this.user.email,
+      password: this.user.password
     };
     this.registerService.addUser(data)
       .subscribe(
