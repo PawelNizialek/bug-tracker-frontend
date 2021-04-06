@@ -1,0 +1,49 @@
+body{
+  margin: 0px;
+  font: normal normal normal 16px/21px Segoe UI;
+}
+.login-page{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-container{
+  top: 208px;
+  left: 509px;
+  width: 349px;
+  height: 353px;
+  margin: 1em;
+  padding: 1em;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border: 1px solid #707070;
+  opacity: 0.7;
+}
+.login-container p{
+  text-align: left;
+  font: normal normal normal 30px/40px Segoe UI;
+  letter-spacing: 0px;
+  color: #707070;
+}
+.password-reminder{
+  text-align: left;
+  letter-spacing: 0px;
+}
+.login-container button{
+  margin-top: 0.5em;
+  background: #929292 0% 0% no-repeat padding-box;
+  border: 1px solid #707070;
+}
+.login-container form{
+  width: 90%;
+}
+.login-container input{
+  width: 100%;
+}
+.new-account{
+  text-align: left;
+  font: normal normal normal 16px/21px Segoe UI;
+  letter-spacing: 0px;
+}

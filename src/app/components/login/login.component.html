@@ -1,0 +1,25 @@
+<body>
+  <div class="login-page">
+  <div class="login-container">
+    <p>Sign-In</p>
+    <form>
+      Email
+      <br><input name="username" type="text" required
+                 [(ngModel)]="user.email"><br>
+      Password
+      <br><input name="password" type="password" required
+                 [(ngModel)]="user.password"><br>
+      <button (click)="loginUser()">Continue</button>
+      <div *ngIf="logged">
+        logged
+      </div>
+    </form>
+    <div class="password-reminder">
+      Forget your password?<br>Click <a href="">here</a> to reset
+    </div>
+  </div>
+  <div class="new-account">
+    Create your new account!
+  </div>
+  </div>
+</body>

@@ -1,0 +1,28 @@
+<body>
+<div class="login-page">
+  <div class="login-container">
+    <p>Sign up</p>
+    <form>
+      Email
+      <br><input name="email" type="text" required
+                 [(ngModel)]="user.email"><br>
+      First name
+      <br><input name="firstname" type="text" required
+                 [(ngModel)]="user.firstName"><br>
+      Last name
+      <br><input name="lastname" type="text" required
+                 [(ngModel)]="user.lastName"><br>
+      Password
+      <br><input name="lastname" type="password" required
+                 [(ngModel)]="user.password"><br>
+      <button class="btn btn-register" (click)="saveUser()">Continue</button>
+      <div *ngIf="registered">
+        registered
+      </div>
+    </form>
+    <div class="password-reminder">
+      Do you have your account?<br>Click <a href="">here</a> to sign in!
+    </div>
+  </div>
+</div>
+</body>
