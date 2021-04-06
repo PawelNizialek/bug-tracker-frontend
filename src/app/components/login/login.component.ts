@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from '../../services/login.service';
-import {User} from '../../models/user';
+import { LoginService } from '../../services/login.service';
+import { User} from '../../models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   };
   logged = false;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
         response => {
           console.log(response);
           this.logged = true;
+          this.router.navigate(['/dashboard']);
         },
         error => {
           console.log(error);
