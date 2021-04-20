@@ -12,7 +12,10 @@ export class RegisterComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
+    role: '',
+    userId: 0,
+    enabled: true
   };
   registered = false;
 
