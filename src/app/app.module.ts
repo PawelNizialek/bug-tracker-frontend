@@ -11,6 +11,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { JwtInterceptor } from './interceptor/jwt-interceptor';
 import { HeaderComponent } from './components/header/header.component';
+import { RoleManagerComponent } from './components/role-manager/role-manager.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HeaderComponent } from './components/header/header.component';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    RoleManagerComponent
   ],
   imports: [
     BrowserModule,

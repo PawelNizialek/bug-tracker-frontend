@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {RoleManagerComponent} from './components/role-manager/role-manager.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'signin', pathMatch: 'full' },
   { path: 'signin', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'roles', component: RoleManagerComponent },
   { path: 'dashboard', component: DashboardComponent }
 ];
 
