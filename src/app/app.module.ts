@@ -12,6 +12,7 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { JwtInterceptor } from './interceptor/jwt-interceptor';
 import { HeaderComponent } from './components/header/header.component';
 import { RoleManagerComponent } from './components/role-manager/role-manager.component';
+import { TicketComponent } from './components/ticket/ticket.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RoleManagerComponent } from './components/role-manager/role-manager.com
     RegisterComponent,
     DashboardComponent,
     HeaderComponent,
-    RoleManagerComponent
+    RoleManagerComponent,
+    TicketComponent
   ],
   imports: [
     BrowserModule,
