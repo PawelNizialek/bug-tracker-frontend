@@ -1,1 +1,223 @@
-<p>ticket works!</p>
+<app-header></app-header>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container" id="main-ticket-container">
+  <section class="content">
+    <div class="row">
+      <!-- BEGIN TICKET -->
+      <div class="col-md-9">
+        <div class="grid support-content">
+          <div class="grid-body">
+            <h2>Tickets</h2>
+            <input class="form-control mr-sm-2" (ngModelChange)="searchTickets(key.value)" #key="ngModel" ngModel name="key"
+                   type="text" placeholder="Search by email..." aria-label="Search" required>
+            <hr>
+            <!-- BEGIN NEW TICKET -->
+            <button (click)="onOpenModal(null, 'add')"
+                    type="button" class="btn btn-secondary pull-right"
+                    data-toggle="modal" data-target="#newIssue">New Ticket</button><br>
+            <div class="padding"></div>
+            <div class="row">
+              <!-- BEGIN TICKET CONTENT -->
+              <div *ngFor="let project of tickets" class="col-md-12">
+                <ul class="fa-padding">
+                  <li  class="list-group-item" data-toggle="modal" data-target="#issue">
+                    <div class="media">
+                      <div class="media-body">
+                        <h4>{{project.title}} </h4>
+                        <span *ngIf="project.status === 'OPEN'" class="badge bg-warning my-2">{{project.status}}</span>
+                        <span *ngIf="project.status === 'CLOSE'" class="badge bg-success my-2">{{project.status}}</span>
+                        <span class="badge bg-light my-2 number pull-right">{{project.type}}</span>
+
+                        <p class="info">{{project.desc}}</p>
+                        <span class="number pull-right badge bg-red my-3">Priority: {{project.priority}}</span>
+                        <span class="number pull-left my-3">Project Name: <strong>{{project.projectName}}</strong></span>
+                        <br><br><span class="number pull-left">Assigned users: <strong>{{project.usersEmails}}</strong></span>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="float-right btn-group btn-group-sm">
+                        <a *ngIf="project.status === 'OPEN'" (click)="closeTicket(project.ticketId)"
+                           class="btn btn-light tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-lock"></i> </a>
+                        <a *ngIf="project.status === 'OPEN'" (click)="onOpenModal(project, 'edit')"
+                           class="btn btn-light tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenModal(project, 'delete')"
+                           class="btn btn-light tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                        <a *ngIf="project.status === 'OPEN'" (click)="onOpenModal(project, 'addUsers')"
+                           class="btn btn-light tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-user-plus"></i></a>
+                      </div>
+                      <br>
+                    </div>
+                  </li>
+                  <br>
+                </ul>
+                <!-- END DETAIL TICKET -->
+              </div>
+              <!-- END TICKET CONTENT -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END TICKET -->
+    </div>
+  </section>
+</div>
+
+<div class="modal fade" id="assignUserModal" tabindex="-1" aria-labelledby="addTicketModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="assignUserLabel">Add User</h5>
+      </div>
+      <div class="modal-body">
+        <form #addTicketForm="ngForm" (ngSubmit)="addTicket()">
+          <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+          <hr>
+          <div class="container bootstrap snippets bootdey">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="main-box no-header clearfix">
+                  <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                      <table class="table user-list">
+                        <thead>
+                        <tr>
+                          <th><span>User</span></th>
+                          <th><span>Add</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let user of users">
+                          <td>{{user.firstName}} {{user.lastName}}</td>
+                          <td *ngIf="user.userId!==ticket.ticketId" style="width: 20%;">
+                            <a (click)="assignUser(user, addUserTicket.ticketId)" class="table-link text-success">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                            </a>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="hidden" [(ngModel)]="ticket.title" name="projectId" class="form-control" id="edit-project-id" placeholder="Description" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="add-ticket-user-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal add -->
+<div class="modal fade" id="addTicketModal" tabindex="-1" aria-labelledby="addTicketModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTicketLabel">Add Ticket</h5>
+      </div>
+      <div class="modal-body">
+        <form #addTicketForm="ngForm" (ngSubmit)="addTicket()">
+          <div class="d-block my-3">
+            <div class="mb-3">
+              <label>Choose project</label>
+              <select [ngModel]="selectedProject" [ngModelOptions]="{standalone: true}" (ngModelChange)="changeProject($event)" class="form-control">
+                <option *ngFor="let project of filterItemsOfType('PROGRESS')" [ngValue]="project.projectId">{{project.name}}</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="edit-project-name">Title</label>
+            <input type="text" [(ngModel)]="ticket.title" name="title" class="form-control" id="edit-project-name" placeholder="Name" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-project-desc">Description</label>
+            <textarea rows="7" [(ngModel)]="ticket.desc" name="desc" class="form-control" id="edit-project-desc" placeholder="Description" required></textarea>
+          </div>
+          <div class="d-block my-3">
+            <div class="mb-3">
+              <label>Type</label>
+              <select [(ngModel)]="ticket.type" [ngModelOptions]="{standalone: true}" class="form-control">
+                <option>ERRORS</option>
+                <option>FEATURE</option>
+                <option>OTHER</option>
+              </select>
+            </div>
+          </div>
+          <div class="d-block my-3">
+            <div class="mb-3">
+              <label>Priority</label>
+              <select [(ngModel)]="ticket.priority" [ngModelOptions]="{standalone: true}" class="form-control">
+                <option>LOW</option>
+                <option>MEDIUM</option>
+                <option>HIGH</option>
+                <option>CRITICAL</option>
+              </select>
+            </div>
+          </div>
+          <h4></h4>
+          <div class="form-group">
+            <input type="hidden" [(ngModel)]="ticket.title" name="projectId" class="form-control" id="edit-project-id" placeholder="Description" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="add-ticket-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button [disabled]="addTicketForm.invalid" type="submit" class="btn btn-primary" >Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal edit -->
+<div class="modal fade" id="editTicketModal" tabindex="-1" aria-labelledby="editProjectModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit projects</h5>
+      </div>
+      <div class="modal-body">
+        <form #editProjectForm="ngForm">
+          <div class="form-group">
+            <input type="hidden" ngModel="{{editTicket?.ticketId}}" name="ticketId" class="form-control" id="edit-ticket-id" placeholder="id" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-ticket-title">Title</label>
+            <input type="text" ngModel="{{editTicket?.title}}" name="title" class="form-control" id="edit-ticket-title" placeholder="title" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-ticket-desc">Desc</label>
+            <textarea rows="7" ngModel="{{editTicket?.desc}}" name="desc" class="form-control" id="edit-ticket-desc" placeholder="desc" required></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="edit-project-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button (click)="updateTicket(editProjectForm.value)" type="submit" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteTicketModel" tabindex="-1" aria-labelledby="deleteProjectModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete item?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del-project-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button (click)="deleteTicket(delTicket.ticketId)" type="submit" class="btn btn-danger" >Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
