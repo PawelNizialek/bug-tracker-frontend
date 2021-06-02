@@ -20,9 +20,9 @@ import { TicketComponent } from './components/ticket/ticket.component';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    HeaderComponent,
+    TicketComponent,
     RoleManagerComponent,
-    TicketComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
