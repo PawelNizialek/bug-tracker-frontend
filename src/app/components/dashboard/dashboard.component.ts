@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Project} from '../../models/project';
 import {ProjectService} from '../../services/project.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {isEmpty} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -74,7 +76,7 @@ export class DashboardComponent implements OnInit {
         console.log(response);
         this.getAll();
       },
-      error => {
+        error => {
         console.log(error);
       }
     );
@@ -86,7 +88,7 @@ export class DashboardComponent implements OnInit {
     const results: Project[] = [];
     for (const project of this.projects) {
       if (project.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        project.description.toLowerCase().indexOf(key.toLowerCase()) !== -1){
+          project.description.toLowerCase().indexOf(key.toLowerCase()) !== -1){
         results.push(project);
       }
     }

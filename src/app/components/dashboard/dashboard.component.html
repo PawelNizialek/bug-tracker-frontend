@@ -2,7 +2,6 @@
 <script src="../../models/project.ts"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container p-0" id="main-dashboard-container">
-
   <form class="form-inline mt-2 mt-md-0">
     <input class="form-control mr-sm-2" (ngModelChange)="searchProjects(key.value)" #key="ngModel" ngModel name="key"
            type="text" placeholder="Search" aria-label="Search" required>
@@ -37,6 +36,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="addProjectModal" tabindex="-1" aria-labelledby="addProjectModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -62,6 +62,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="editProjectModal" tabindex="-1" aria-labelledby="editProjectModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -91,16 +92,17 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="deleteProjectModal" tabindex="-1" aria-labelledby="deleteProjectModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="deleteModalLabel">Delete item?</h5>
       </div>
-      <div class="modal-footer">
-        <button type="button" id="del-project-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button (click)="deleteProject(delProject.projectId)" type="submit" class="btn btn-danger" >Delete</button>
-      </div>
+          <div class="modal-footer">
+            <button type="button" id="del-project-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button (click)="deleteProject(delProject.projectId)" type="submit" class="btn btn-danger" >Delete</button>
+          </div>
     </div>
   </div>
 </div>

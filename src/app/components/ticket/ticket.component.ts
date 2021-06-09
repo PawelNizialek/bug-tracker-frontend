@@ -49,21 +49,21 @@ export class TicketComponent implements OnInit {
       this.retrieveAllTickets();
     }
   }
-  filterItemsOfType(type): any{
+  public filterItemsOfType(type): any{
     return this.projects?.filter(x => x.status === type);
   }
-  retrieveAllTickets(): void {
+  public retrieveAllTickets(): void {
     setTimeout(() => {
-      this.ticketService.getAll()
-        .subscribe(
-          data => {
-            this.tickets = data;
-            console.log(data);
-          },
-          error => {
-            console.log(error);
-          }
-        );
+    this.ticketService.getAll()
+      .subscribe(
+        data => {
+          this.tickets = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }, 1000);
   }
   public retrieveAllUsers(): void{
